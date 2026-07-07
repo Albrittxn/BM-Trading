@@ -1,19 +1,8 @@
-BM Trading — Discord Modal Fixed Version
+BM Trading — Purple Only Final
 
-Fixed:
-- Rebuilt from the last working landing-page version.
-- Removed the broken extra modal closing tag issue.
-- Removed the old automatic timed popup JavaScript.
-- Removed the leftover JavaScript that was breaking the bottom of the site.
-- Free Discord CTAs now open the modal only on click.
-- Modal collects full name, email, and phone.
-- Submit button says “Get Access”.
-- Valid submit redirects directly to Discord:
-  https://discord.gg/2m2VnxhXwp
+Updated:
+- Removed the remaining green/emerald references from the source.
+- All accent visuals are now purple/violet.
+- Preserved the Free Discord modal, direct Discord redirect, paid Whop links, smooth reviews, heading fix, and mobile fixes.
 
-Preserved:
-- Centered free Discord landing page flow.
-- “Take the next step” scroll to paid plans.
-- Paid plan Whop checkout links.
-- Smooth auto-sliding reviews.
-- Mobile form/FAQ fixes.
+Source scan: no green/emerald terms or known green color values found.
