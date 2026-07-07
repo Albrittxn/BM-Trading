@@ -1,8 +1,10 @@
-BM Trading — Purple Only Final
+BM Trading — Strict Purple Version
 
 Updated:
-- Removed the remaining green/emerald references from the source.
-- All accent visuals are now purple/violet.
-- Preserved the Free Discord modal, direct Discord redirect, paid Whop links, smooth reviews, heading fix, and mobile fixes.
+- Removed green, emerald, blue, gold, amber, and yellow accent references/values.
+- All visible accent colors are now purple/violet/lavender.
+- Dark background, white text, and gray neutrals remain for contrast/readability.
+- Preserved Free Discord modal, direct Discord redirect, paid plan links, smooth reviews, heading fix, and mobile fixes.
 
-Source scan: no green/emerald terms or known green color values found.
+
+Source scan: no green/emerald/blue/gold/amber/yellow accent terms or known color values found.
