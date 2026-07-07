@@ -1813,27 +1813,68 @@
       }
     }
 
+
+    /* Heading clipping fix */
+    h1 {
+      line-height: .96;
+      padding-bottom: .08em;
+      overflow: visible;
+    }
+
+    .gradient-text {
+      display: inline-block;
+      padding-bottom: .035em;
+    }
+
+    @media (max-width: 760px) {
+      h1 {
+        line-height: .98;
+        padding-bottom: .1em;
+      }
+    }
+
+
+    /* Click-triggered Discord access modal cleanup */
+    .lead-modal {
+      max-width: 500px;
+    }
+
+    .lead-form {
+      gap: 14px;
+    }
+
+    .lead-submit {
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
   </style>
 </head>
 <body class="page-loading">
   <div class="lead-modal-backdrop" id="leadModal" aria-hidden="true">
     <div class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
       <button class="lead-modal-close" id="leadModalClose" aria-label="Close popup">×</button>
-      <div class="lead-modal-kicker">BM Trading Preview</div>
-      <h2 id="leadModalTitle">Get BM Trading details sent to you.</h2>
-      <p>Enter your info and we’ll send the free Discord link, paid VIP options, and next steps.</p>
+      <div class="lead-modal-kicker">Free Discord Access</div>
+      <h2 id="leadModalTitle">Get free access to BM Trading.</h2>
+      <p>Enter your details below and we’ll send you directly to the BM Trading Discord.</p>
       <form class="lead-form" id="leadForm" novalidate>
-        <div class="form-grid">
-          <label><span>First name</span><input type="text" name="firstName" autocomplete="given-name" placeholder="First name" required></label>
-          <label><span>Last name</span><input type="text" name="lastName" autocomplete="family-name" placeholder="Last name" required></label>
-        </div>
-        <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
-        <label><span>Phone</span><input type="tel" name="phone" autocomplete="tel" placeholder="(555) 555-5555" required></label>
-        <button type="submit" class="btn btn-primary lead-submit">Continue →</button>
-        <div class="lead-form-note">No spam. Just BM Trading offer details.</div>
+        <label>
+          <span>Full name</span>
+          <input type="text" name="fullName" autocomplete="name" placeholder="Full name" required>
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          <span>Phone</span>
+          <input type="tel" name="phone" autocomplete="tel" placeholder="(555) 555-5555" required>
+        </label>
+        <button type="submit" class="btn btn-primary lead-submit">Get Access →</button>
+        <div class="lead-form-note">After submitting, you’ll be redirected to Discord.</div>
       </form>
-      <div class="lead-success" id="leadSuccess"><strong>Got it.</strong> Info saved on this device. Connect to a form backend before running traffic.</div>
     </div>
+  </div>
   </div>
 
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -1851,9 +1892,9 @@
         <a href="#model">The Model</a>
         <a href="#plans">Paid Plans</a>
         <a href="#reviews">Reviews</a>
-        <a href="https://whop.com/checkout/plan_H1ZO4NKD9f4lW" target="_blank" rel="noopener">Free Discord</a>
+        <a href="#free-discord-access" class="open-discord-modal">Free Discord</a>
         <a href="#faq">FAQ</a>
-        <a class="nav-cta" href="https://whop.com/checkout/plan_H1ZO4NKD9f4lW" target="_blank" rel="noopener">Join Free →</a>
+        <a class="nav-cta open-discord-modal" href="#free-discord-access">Join Free →</a>
       </div>
 
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">☰</button>
@@ -1871,7 +1912,7 @@
           </p>
 
           <div class="hero-actions hero-actions-centered">
-            <a class="btn btn-primary btn-mega" href="https://whop.com/checkout/plan_H1ZO4NKD9f4lW" target="_blank" rel="noopener">Join Free Discord →</a>
+            <a class="btn btn-primary btn-mega open-discord-modal" href="#free-discord-access">Join Free Discord →</a>
             <a class="btn btn-secondary" href="#plans">Take the next step ↓</a>
           </div>
 
@@ -2250,7 +2291,7 @@
             <h2>Get inside BM Trading today.</h2>
             <p>Join the free Discord first. When you are ready for more structure, scroll back to the paid VIP options and choose your next step.</p>
           </div>
-          <a class="btn btn-primary" href="https://whop.com/checkout/plan_H1ZO4NKD9f4lW" target="_blank" rel="noopener">Join Free Discord →</a>
+          <a class="btn btn-primary open-discord-modal" href="#free-discord-access">Join Free Discord →</a>
         </div>
       </div>
     </section>
@@ -2263,7 +2304,7 @@
         <a href="#model">The Model</a>
         <a href="#plans">Paid Plans</a>
         <a href="#reviews">Reviews</a>
-        <a href="https://whop.com/checkout/plan_H1ZO4NKD9f4lW" target="_blank" rel="noopener">Free Discord</a>
+        <a href="#free-discord-access" class="open-discord-modal">Free Discord</a>
         <a href="#faq">FAQ</a>
       </div>
     </div>
@@ -2271,16 +2312,63 @@
 
   <script>
 
+    // Free Discord access modal. Opens only when a Free Discord CTA is clicked.
+    const leadModal = document.getElementById('leadModal');
+    const leadModalClose = document.getElementById('leadModalClose');
+    const leadForm = document.getElementById('leadForm');
+    const discordInviteUrl = "https://discord.gg/2m2VnxhXwp";
 
-    // Lead capture popup. Static version stores leads locally until a real form endpoint is connected.
-    const leadModal=document.getElementById('leadModal'),leadModalClose=document.getElementById('leadModalClose'),leadForm=document.getElementById('leadForm'),leadSuccess=document.getElementById('leadSuccess');
-    function openLeadModal(){if(!leadModal||localStorage.getItem('bmLeadPopupDismissed')==='true')return;leadModal.classList.add('open');leadModal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open')}
-    function closeLeadModal(){if(!leadModal)return;leadModal.classList.remove('open');leadModal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');localStorage.setItem('bmLeadPopupDismissed','true')}
-    setTimeout(openLeadModal,4500);
-    if(leadModalClose)leadModalClose.addEventListener('click',closeLeadModal);
-    if(leadModal)leadModal.addEventListener('click',e=>{if(e.target===leadModal)closeLeadModal()});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLeadModal()});
-    if(leadForm)leadForm.addEventListener('submit',e=>{e.preventDefault();if(!leadForm.checkValidity()){leadForm.reportValidity();return;}const data=Object.fromEntries(new FormData(leadForm).entries());const leads=JSON.parse(localStorage.getItem('bmTradingLeads')||'[]');leads.push({...data,submittedAt:new Date().toISOString()});localStorage.setItem('bmTradingLeads',JSON.stringify(leads));localStorage.setItem('bmLeadPopupDismissed','true');leadForm.reset();if(leadSuccess)leadSuccess.classList.add('show');setTimeout(closeLeadModal,1800)});
+    function openLeadModal(event) {
+      if (event) event.preventDefault();
+      if (!leadModal) return;
+      leadModal.classList.add('open');
+      leadModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      const firstInput = leadModal.querySelector('input[name="fullName"]');
+      setTimeout(() => firstInput && firstInput.focus(), 180);
+    }
+
+    function closeLeadModal() {
+      if (!leadModal) return;
+      leadModal.classList.remove('open');
+      leadModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    document.querySelectorAll('.open-discord-modal').forEach(trigger => {
+      trigger.addEventListener('click', openLeadModal);
+    });
+
+    if (leadModalClose) leadModalClose.addEventListener('click', closeLeadModal);
+
+    if (leadModal) {
+      leadModal.addEventListener('click', event => {
+        if (event.target === leadModal) closeLeadModal();
+      });
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeLeadModal();
+    });
+
+    if (leadForm) {
+      leadForm.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!leadForm.checkValidity()) {
+          leadForm.reportValidity();
+          return;
+        }
+
+        const data = Object.fromEntries(new FormData(leadForm).entries());
+        const leads = JSON.parse(localStorage.getItem('bmTradingDiscordLeads') || '[]');
+        leads.push({ ...data, submittedAt: new Date().toISOString() });
+        localStorage.setItem('bmTradingDiscordLeads', JSON.stringify(leads));
+
+        window.location.href = discordInviteUrl;
+      });
+    }
+
+localStorage.setItem('bmTradingLeads',JSON.stringify(leads));leadForm.reset();if(leadSuccess)leadSuccess.classList.add('show');setTimeout(closeLeadModal,1800)});
 
     // Smooth polish pass: page load, scroll progress, sticky nav state, active nav link, dynamic FAQ height.
     window.addEventListener('load', () => {
