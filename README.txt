@@ -1,19 +1,19 @@
-BM Trading — Discord Access Modal Version
+BM Trading — Discord Modal Fixed Version
 
-Updated:
-- Removed the automatic timed popup entirely.
-- Any Free Discord CTA now opens a popup form.
-- Form collects: full name, email, and phone.
-- Submit button says: Get Access.
-- After valid submission, user is redirected to the direct Discord invite:
+Fixed:
+- Rebuilt from the last working landing-page version.
+- Removed the broken extra modal closing tag issue.
+- Removed the old automatic timed popup JavaScript.
+- Removed the leftover JavaScript that was breaking the bottom of the site.
+- Free Discord CTAs now open the modal only on click.
+- Modal collects full name, email, and phone.
+- Submit button says “Get Access”.
+- Valid submit redirects directly to Discord:
   https://discord.gg/2m2VnxhXwp
 
 Preserved:
-- Paid plan checkout links.
-- Free Discord landing page hero direction.
+- Centered free Discord landing page flow.
+- “Take the next step” scroll to paid plans.
+- Paid plan Whop checkout links.
 - Smooth auto-sliding reviews.
-- Mobile form hardening.
-- FAQ mobile fix.
-
-Important:
-The form stores submissions in the visitor's browser localStorage only. To collect leads for the client, connect this to a real backend/CRM/form endpoint.
+- Mobile form/FAQ fixes.
